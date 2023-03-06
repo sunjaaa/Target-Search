@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { getTarget, getUsers } from "../../api/humanInfo";
 import SearchInput from "../../components/Input/SearchInput";
+import { fetchHuman, useHuman } from "../../hooks/useHuman";
+import NoResult from "./NoResult";
 import SearchResults from "./SearchResults";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
+
+  const [infos, setInfos] = useState();
+
+  console.log(infos);
 
   const activeEnter = (e: any) => {
     if (e.key === "Enter") {
@@ -14,12 +19,16 @@ const Home = () => {
     }
   };
 
-  const activeButton = () => {
+  const activeButton = async () => {
     console.log("INPUT TARGET : ", inputText);
-    // getUsers(inputText);
-    getTarget(inputText);
-    // setInputText("");
+    const info = await fetchHuman(inputText);
+    setInfos(info);
+    console.log("111", info);
+
+    console.log("main page human.targetInfo", info.name);
   };
+
+  // console.log(infos);
 
   return (
     <>
@@ -29,7 +38,7 @@ const Home = () => {
           onKeyDown={(e) => activeEnter(e)}
         />
       </Container>
-      <SearchResults />
+      {infos ? <SearchResults targetInfo={infos} /> : <NoResult />}
     </>
   );
 };

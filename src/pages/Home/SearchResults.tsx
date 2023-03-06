@@ -1,11 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const SearchResults = () => {
+export interface Props {
+  targetInfo?: any;
+}
+
+const SearchResults = ({ targetInfo }: Props) => {
+  console.log("targetInfo", targetInfo);
+
+  const targetName = targetInfo.name;
+
   return (
     <Container>
       <TextBox>
-        <Title>SearchResults</Title>
+        <Title>{targetName}</Title>
 
         <Description>
           Since the beginning of this year, I've been working with a California
