@@ -7,7 +7,7 @@ export type InputChangeEvent = ChangeEvent<HTMLInputElement>;
 export interface Props {
   value?: InputValue;
   placeholder?: string;
-  onChange?: (v: InputChangeEvent) => void;
+  onChange?: (e: InputChangeEvent) => void;
   onKeyDown?: React.KeyboardEventHandler;
 }
 

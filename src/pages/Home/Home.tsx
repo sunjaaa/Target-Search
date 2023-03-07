@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import SearchInput from "../../components/Input/SearchInput";
-import { fetchHuman, useHuman } from "../../hooks/useHuman";
+import { fetchHuman } from "../../hooks/useHuman";
 import NoResult from "./NoResult";
 import SearchResults from "./SearchResults";
 
 const Home = () => {
-  const [inputText, setInputText] = useState("");
+  useEffect(() => console.log("렌더링된다"));
 
-  const [infos, setInfos] = useState();
+  const inputText = useRef("");
+  const resultTarget = useRef("");
 
-  console.log(infos);
+  console.log("inputText.current", inputText.current);
 
   const activeEnter = (e: any) => {
     if (e.key === "Enter") {
@@ -19,26 +20,32 @@ const Home = () => {
     }
   };
 
-  const activeButton = async () => {
-    console.log("INPUT TARGET : ", inputText);
-    const info = await fetchHuman(inputText);
-    setInfos(info);
-    console.log("111", info);
-
-    console.log("main page human.targetInfo", info.name);
+  const onChange = (e: any) => {
+    const value = e.target.value;
+    inputText.current = value;
   };
 
-  // console.log(infos);
+  const activeButton = async () => {
+    console.log("INPUT TARGET : ", inputText.current);
+
+    const info = await fetchHuman(inputText.current);
+    resultTarget.current = info;
+
+    console.log("info ", info);
+  };
+
+  
 
   return (
     <>
       <Container>
-        <SearchInput
-          onChange={(e) => setInputText(e.target.value)}
-          onKeyDown={(e) => activeEnter(e)}
-        />
+        <SearchInput onChange={onChange} onKeyDown={(e) => activeEnter(e)} />
       </Container>
-      {infos ? <SearchResults targetInfo={infos} /> : <NoResult />}
+      {resultTarget.current ? (
+        <SearchResults targetInfo={resultTarget} />
+      ) : (
+        <NoResult />
+      )}
     </>
   );
 };
