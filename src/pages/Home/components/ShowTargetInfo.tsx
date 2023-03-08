@@ -1,16 +1,15 @@
-import React from "react";
 import styled from "styled-components";
 
 export interface Props {
-  targetInfo?: any;
+  targetInfo?: object[];
 }
 
 const ShowTargetInfo = ({ targetInfo }: Props) => {
-  console.log("targetInfo params", targetInfo);
   console.log("targetInfo params", typeof targetInfo);
-  console.log("targetInfo params", targetInfo.length);
 
-  if (targetInfo.length === 0) {
+  const info = targetInfo?.filter((e) => console.log(typeof e));
+
+  if (0 === 0) {
     return (
       <NoResult>
         <TextBox>
@@ -19,13 +18,13 @@ const ShowTargetInfo = ({ targetInfo }: Props) => {
       </NoResult>
     );
   } else {
-    const targetName = targetInfo.name;
+    // const targetName = targetInfo.name;
+    const targetName = "1";
 
     return (
       <Container>
         <TextBox>
           <Title>{targetName}</Title>
-
           <Description>
             Since the beginning of this year, I've been working with a
             California Department of Food and Agriculture cooperative to
@@ -93,6 +92,12 @@ const TextBox = styled.div`
 `;
 
 const NoResult = styled.div`
+  display: flex;
+  flex: 1;
   height: 100vh;
-  background-color: #3b2044;
+  background-color: #000000c5;
+  padding-left: 16px;
+  border-top-style: solid;
+  border-width: 1px;
+  border-top-color: #ffffff;
 `;

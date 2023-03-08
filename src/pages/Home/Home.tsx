@@ -6,13 +6,15 @@ import ShowTargetInfo from "./components/ShowTargetInfo";
 import { fetchHuman } from "../../hooks/useHuman";
 
 const Home = () => {
+  const [result, setResult] = useState<Object[]>();
+
   const inputText = useRef("");
-  const [result, setResult] = useState<Object>();
 
   useEffect(() => console.log("렌더링"));
 
   const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      console.log("e.key", e.key);
       e.preventDefault();
       activeButton();
     }
@@ -25,7 +27,6 @@ const Home = () => {
 
   const activeButton = async () => {
     console.log("INPUT TARGET : ", inputText.current);
-
     const info = await fetchHuman(inputText.current);
     setResult(info);
   };
@@ -54,6 +55,12 @@ const Container = styled.form`
 `;
 
 const Empty = styled.div`
+  display: flex;
+  flex: 1;
   height: 100vh;
-  background-color: #00ffae;
+  background-color: #000000c5;
+  padding-left: 16px;
+  border-top-style: solid;
+  border-width: 1px;
+  border-top-color: #ffffff;
 `;
