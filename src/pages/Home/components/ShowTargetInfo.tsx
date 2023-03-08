@@ -6,10 +6,9 @@ export interface Props {
 
 const ShowTargetInfo = ({ targetInfo }: Props) => {
   console.log("targetInfo params", typeof targetInfo);
+  console.log("targetInfo", targetInfo);
 
-  const info = targetInfo?.filter((e) => console.log(typeof e));
-
-  if (0 === 0) {
+  if (!targetInfo) {
     return (
       <NoResult>
         <TextBox>
@@ -59,7 +58,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   height: 100vh;
-  background-color: #000000c5;
+  background-color: #000000;
   padding-left: 16px;
   border-top-style: solid;
   border-width: 1px;
@@ -95,7 +94,7 @@ const NoResult = styled.div`
   display: flex;
   flex: 1;
   height: 100vh;
-  background-color: #000000c5;
+  background-color: #000000;
   padding-left: 16px;
   border-top-style: solid;
   border-width: 1px;

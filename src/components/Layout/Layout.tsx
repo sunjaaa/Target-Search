@@ -12,7 +12,7 @@ const Layout = ({ children }: layoutProps) => {
     <Wrapper>
       <ContentWrapper>
         <Header />
-        <MainBox>{children}</MainBox>
+        {children}
       </ContentWrapper>
       <Footer />
     </Wrapper>
@@ -20,10 +20,6 @@ const Layout = ({ children }: layoutProps) => {
 };
 
 export default Layout;
-
-const MainBox = styled.main`
-  background-color: #000000;
-`;
 
 const Wrapper = styled.div`
   display: flex;

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import SearchInput from "../../components/Input/SearchInput";
 import ShowTargetInfo from "./components/ShowTargetInfo";
 
+import Snipper from "react-spinner-material";
+
 import { fetchHuman } from "../../hooks/useHuman";
 
 const Home = () => {
@@ -33,17 +35,23 @@ const Home = () => {
 
   return (
     <>
-      <Container>
-        <SearchInput onChange={onChange} onKeyDown={activeEnter} />
-      </Container>
-      {result ? <ShowTargetInfo targetInfo={result} /> : <Empty />}
+      <InputContainer>
+        <InputBox>
+          <SearchInput onChange={onChange} onKeyDown={activeEnter} />
+        </InputBox>
+      </InputContainer>
+      <ShowTargetInfo targetInfo={result} />
     </>
   );
 };
 
 export default Home;
 
-const Container = styled.form`
+const InputContainer = styled.div`
+  background-color: #000000;
+`;
+
+const InputBox = styled.form`
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -58,7 +66,7 @@ const Empty = styled.div`
   display: flex;
   flex: 1;
   height: 100vh;
-  background-color: #000000c5;
+  background-color: #000000;
   padding-left: 16px;
   border-top-style: solid;
   border-width: 1px;
