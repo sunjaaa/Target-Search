@@ -18,7 +18,7 @@ export const get = async (str: string): Promise<any> => {
         target: str,
       },
     });
-    console.log("response", response.data);
+    console.log("get response", response.data);
     return response.data;
   } catch (error) {
     console.error(error);

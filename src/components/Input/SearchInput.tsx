@@ -1,8 +1,8 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import styled from "styled-components";
 
 export type InputValue = string | number | ReadonlyArray<string>;
-export type InputChangeEvent = ChangeEvent<HTMLInputElement>;
+export type InputChangeEvent = React.ChangeEvent<HTMLInputElement>;
 
 export interface Props {
   value?: InputValue;

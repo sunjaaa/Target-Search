@@ -21,7 +21,7 @@ export const useHuman = () => {
   return [human, getHuman];
 };
 
-export const fetchHuman = async (str: any): Promise<any> => {
+export const fetchHuman = async (str: string): Promise<any> => {
   const response = api.human.getInformations(str);
   return response;
 };

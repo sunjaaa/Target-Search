@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import SearchInput from "../../components/Input/SearchInput";
 import { fetchHuman } from "../../hooks/useHuman";
@@ -11,16 +11,18 @@ const Home = () => {
   const inputText = useRef("");
   const resultTarget = useRef("");
 
+  const [result, setResult] = useState<Object>();
+
   console.log("inputText.current", inputText.current);
 
-  const activeEnter = (e: any) => {
+  const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
       activeButton();
     }
   };
 
-  const onChange = (e: any) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     inputText.current = value;
   };
@@ -29,23 +31,19 @@ const Home = () => {
     console.log("INPUT TARGET : ", inputText.current);
 
     const info = await fetchHuman(inputText.current);
-    resultTarget.current = info;
 
-    console.log("info ", info);
+    console.log("info ", typeof info);
+    setResult(info);
+
+    // resultTarget.current = info;
   };
-
-  
 
   return (
     <>
       <Container>
-        <SearchInput onChange={onChange} onKeyDown={(e) => activeEnter(e)} />
+        <SearchInput onChange={onChange} onKeyDown={activeEnter} />
       </Container>
-      {resultTarget.current ? (
-        <SearchResults targetInfo={resultTarget} />
-      ) : (
-        <NoResult />
-      )}
+      {result ? <SearchResults targetInfo={result} /> : <NoResult />}
     </>
   );
 };
