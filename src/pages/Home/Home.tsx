@@ -1,19 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import SearchInput from "../../components/Input/SearchInput";
+import ShowTargetInfo from "./components/ShowTargetInfo";
+
 import { fetchHuman } from "../../hooks/useHuman";
-import NoResult from "./NoResult";
-import SearchResults from "./SearchResults";
 
 const Home = () => {
-  useEffect(() => console.log("렌더링된다"));
-
   const inputText = useRef("");
-  const resultTarget = useRef("");
-
   const [result, setResult] = useState<Object>();
 
-  console.log("inputText.current", inputText.current);
+  useEffect(() => console.log("렌더링"));
 
   const activeEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -31,11 +27,7 @@ const Home = () => {
     console.log("INPUT TARGET : ", inputText.current);
 
     const info = await fetchHuman(inputText.current);
-
-    console.log("info ", typeof info);
     setResult(info);
-
-    // resultTarget.current = info;
   };
 
   return (
@@ -43,7 +35,7 @@ const Home = () => {
       <Container>
         <SearchInput onChange={onChange} onKeyDown={activeEnter} />
       </Container>
-      {result ? <SearchResults targetInfo={result} /> : <NoResult />}
+      {result ? <ShowTargetInfo targetInfo={result} /> : <Empty />}
     </>
   );
 };
@@ -59,4 +51,9 @@ const Container = styled.form`
   margin-right: 32%;
   padding-top: 8px;
   padding-bottom: 8px;
+`;
+
+const Empty = styled.div`
+  height: 100vh;
+  background-color: #00ffae;
 `;
