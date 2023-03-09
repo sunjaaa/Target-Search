@@ -32,6 +32,6 @@ const Input = styled.input`
   font-size: 1rem;
   padding: 12px 8px 12px 8px;
   border-width: 1.5px;
-  border-color: solid rgba(14, 120, 67, 0.23);
+  border-color: solid rgba(255, 255, 255, 0.23);
   border-radius: 36px;
 `;

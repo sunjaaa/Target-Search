@@ -8,7 +8,7 @@ import Snipper from "react-spinner-material";
 import { fetchHuman } from "../../hooks/useHuman";
 
 const Home = () => {
-  const [result, setResult] = useState<Object[]>();
+  const [result, setResult] = useState();
 
   const inputText = useRef("");
 
@@ -34,26 +34,30 @@ const Home = () => {
   };
 
   return (
-    <>
-      <InputContainer>
-        <InputBox>
-          <SearchInput onChange={onChange} onKeyDown={activeEnter} />
-        </InputBox>
-      </InputContainer>
+    <Container>
+      <InputBox>
+        <SearchInput onChange={onChange} onKeyDown={activeEnter} />
+      </InputBox>
+
       <ShowTargetInfo targetInfo={result} />
-    </>
+    </Container>
   );
 };
 
 export default Home;
 
-const InputContainer = styled.div`
+const Container = styled.div`
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  flex-direction: column;
   background-color: #000000;
+  padding-left: 16px;
+  padding-right: 16px;
 `;
 
 const InputBox = styled.form`
   display: flex;
-  flex: 1;
   flex-direction: column;
   background-color: #000000;
   margin-left: 32%;
@@ -68,6 +72,7 @@ const Empty = styled.div`
   height: 100vh;
   background-color: #000000;
   padding-left: 16px;
+  padding-right: 16px;
   border-top-style: solid;
   border-width: 1px;
   border-top-color: #ffffff;
