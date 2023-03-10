@@ -1,6 +1,5 @@
+import { helper } from "@utils/index";
 import styled from "styled-components";
-import FlatList from "../../../components/List/FlatList/FlatList";
-import { helper } from "../../../utils";
 
 export interface TargetInfoItem {
   name?: string;

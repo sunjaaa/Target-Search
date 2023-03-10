@@ -1,5 +1,5 @@
-import React from "react";
 import Layout from "@components/Layout/Layout";
+import React from "react";
 
 import Home from "./pages/Home/Home";
 
