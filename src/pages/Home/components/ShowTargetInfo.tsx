@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import FlatList from "../../../components/List/FlatList/FlatList";
 import { helper } from "../../../utils";
 
 export interface TargetInfoItem {
@@ -27,12 +28,12 @@ const ShowTargetInfo = ({ targetInfo }: Props) => {
   } else {
     const targetName = targetInfo[0]?.name;
 
-    const content = targetInfo[0].content ?? "결과가 없습니다.";
+    const content = targetInfo[0].content ?? "콘텐츠 없음";
     const description = helper.removeCommaWithNewLines(content);
 
-    const table = targetInfo[0].table ?? "노 테이블";
+    const table = targetInfo[0].table ?? "테이블 없음";
 
-    const img = targetInfo[0].img ?? "";
+    const img = targetInfo[0].img ?? "이미지 없음";
 
     console.log("targetInfo", targetInfo);
 
@@ -40,9 +41,7 @@ const ShowTargetInfo = ({ targetInfo }: Props) => {
       <Container>
         <TextBox>
           <Title>{targetName}</Title>
-
-          <ImageFrame>
-            {/* <SubTitle>{targetName}</SubTitle> */}
+          <InfoContainer>
             <InfoBox>
               <Img src={img} />
               <DescriptionTiny>
@@ -56,7 +55,7 @@ const ShowTargetInfo = ({ targetInfo }: Props) => {
                 <Description> 배우자 : {table}</Description>
               </DescriptionTiny>
             </InfoBox>
-          </ImageFrame>
+          </InfoContainer>
           <SubContent>
             <Description>{description}</Description>
           </SubContent>
@@ -145,7 +144,7 @@ const Img = styled.img`
   color: white;
 `;
 
-const ImageFrame = styled.div`
+const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
