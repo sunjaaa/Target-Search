@@ -63,7 +63,8 @@ const Home = () => {
           <button type="submit">Submit</button>
         </form>
         <div style={{ backgroundColor: "white" }}>{response}</div>
-      </div> */}
+      </div>{" "} */}
+
       <ShowTargetInfo targetInfo={result} />
     </Container>
   );

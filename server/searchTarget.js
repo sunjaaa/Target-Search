@@ -17,90 +17,49 @@ exports.searchTarget = async (target, list) => {
     (element) => element.textContent
   );
 
-  let pageData = {};
+  let infos = {};
+
+  let cardTables = {};
 
   if (name === target) {
-    // await webPage.waitForSelector(`.infobox > tbody > tr:nth-child(2) > td`, {
-    //   timeout: 3000,
-    // });
-    // await webPage.waitForSelector(`.infobox > tbody > tr:nth-child(5) > td`, {
-    //   timeout: 3000,
-    // });
-    // await webPage.waitForSelector(`.infobox > tbody > tr:nth-child(8) > td`, {
-    //   timeout: 3000,
-    // });
+    const rows = await webPage.$$eval(
+      `#mw-content-text > div.mw-parser-output > table.infobox.vcard > tbody > tr`,
+      (elements) => elements.length
+    );
+    for (let num = 3; num < rows; num++) {
+      try {
+        const data = await webPage.$eval(
+          `#mw-content-text > div.mw-parser-output > table.infobox.vcard > tbody > tr:nth-child(${num})`,
+          (element) => element.textContent
+        );
+        cardTables[`cardInfo${num - 2}`] = data;
+      } catch (e) {
+        cardTables[`cardInfo${num - 2}`] = "";
+      }
+    }
 
     try {
       const name = await webPage.$eval(
         ".firstHeading",
         (element) => element.textContent
       );
-      pageData.name = name;
+      infos.name = name;
     } catch (e) {
-      pageData.name = "";
-    }
-
-    try {
-      const birthDate = await webPage.$eval(
-        ".infobox > tbody > tr:nth-child(2) > td",
-        (element) => element.textContent
-      );
-      pageData.birthDate = birthDate;
-    } catch (e) {
-      pageData.birthDate = "";
-    }
-
-    try {
-      const occupation = await webPage.$eval(
-        ".infobox > tbody > tr:nth-child(5) > td",
-        (element) => element.textContent
-      );
-      pageData.occupation = occupation;
-    } catch (e) {
-      pageData.occupation = "";
-    }
-
-    try {
-      const agency = await webPage.$eval(
-        ".infobox > tbody > tr:nth-child(8) > td",
-        (element) => element.textContent
-      );
-      pageData.agency = agency;
-    } catch (e) {
-      pageData.agency = "";
-    }
-
-    try {
-      const content = await webPage.$eval(
-        "#mw-content-text > div.mw-parser-output",
-        (element) => element.textContent
-      );
-      pageData.content = content;
-    } catch (e) {
-      pageData.content = "";
+      infos.name = "";
     }
 
     try {
       const img = await webPage.$eval(
-        "#mw-content-text > div.mw-parser-output > table.infobox.infobox.vcard > tbody > tr:nth-child(2) > td > a > img",
+        "#mw-content-text > div.mw-parser-output > table.infobox.vcard > tbody > tr:nth-child(2) > td > a > img",
         (element) => element.src
       );
-      pageData.img = img;
+      infos.img = img;
     } catch (e) {
-      pageData.img = "";
+      infos.img = "";
     }
 
-    try {
-      const table = await webPage.$eval(
-        "#mw-content-text > div.mw-parser-output > table.infobox.infobox.vcard",
-        (element) => element.textContent
-      );
-      pageData.table = table;
-    } catch (e) {
-      pageData.table = "";
-    }
-
-    list.push(pageData);
+    list.push(cardTables);
+    list.push(infos);
     console.log("********PUSHED********");
   } else {
     console.log("WRONG TARGET NAME");

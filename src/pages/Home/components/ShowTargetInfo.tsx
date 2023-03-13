@@ -3,16 +3,22 @@ import styled from "styled-components";
 
 export interface TargetInfoItem {
   name?: string;
-  brithDate?: string;
-  occupation?: string;
-  agency?: string;
-  content?: string;
-  table?: string;
   img?: string;
+  cardInfo1?: string;
+  cardInfo2?: string;
+  cardInfo3?: string;
+  cardInfo4?: string;
+  cardInfo5?: string;
+  cardInfo6?: string;
+  cardInfo7?: string;
+  cardInfo8?: string;
+  cardInfo9?: string;
+  cardInfo10?: string;
 }
 
 export interface Props {
   targetInfo?: Array<TargetInfoItem>;
+  aiInfo?: Array<string>;
 }
 
 const ShowTargetInfo = ({ targetInfo }: Props) => {
@@ -25,14 +31,9 @@ const ShowTargetInfo = ({ targetInfo }: Props) => {
       </NoResult>
     );
   } else {
-    const targetName = targetInfo[0]?.name;
+    const targetName = targetInfo[1]?.name ?? "이름 없음";
 
-    const content = targetInfo[0].content ?? "콘텐츠 없음";
-    const description = helper.removeCommaWithNewLines(content);
-
-    const table = targetInfo[0].table ?? "테이블 없음";
-
-    const img = targetInfo[0].img ?? "이미지 없음";
+    const img = targetInfo[1].img ?? "이미지 없음";
 
     console.log("targetInfo", targetInfo);
 
@@ -44,19 +45,21 @@ const ShowTargetInfo = ({ targetInfo }: Props) => {
             <InfoBox>
               <Img src={img} />
               <DescriptionTiny>
-                <Description> 출생 : {table}</Description>
-                <Description> 거주지 : {table}</Description>
-                <Description> 국적 : {table}</Description>
-                <Description> 배우자 : {table}</Description>
-                <Description> 배우자 : {table}</Description>
-                <Description> 배우자 : {table}</Description>
-                <Description> 배우자 : {table}</Description>
-                <Description> 배우자 : {table}</Description>
+                <Description>{targetInfo[0]?.cardInfo1}</Description>
+                <Description>{targetInfo[0]?.cardInfo2}</Description>
+                <Description>{targetInfo[0]?.cardInfo3}</Description>
+                <Description>{targetInfo[0]?.cardInfo4}</Description>
+                <Description>{targetInfo[0]?.cardInfo5}</Description>
+                <Description>{targetInfo[0]?.cardInfo6}</Description>
+                <Description>{targetInfo[0]?.cardInfo7}</Description>
+                <Description>{targetInfo[0]?.cardInfo8}</Description>
+                <Description>{targetInfo[0]?.cardInfo9}</Description>
+                <Description>{targetInfo[0]?.cardInfo10}</Description>
               </DescriptionTiny>
             </InfoBox>
           </InfoContainer>
           <SubContent>
-            <Description>{description}</Description>
+            <Description>콘텐츠 없음</Description>
           </SubContent>
         </TextBox>
       </Container>
@@ -87,15 +90,6 @@ const Title = styled.h2`
   border-radius: 4px;
 `;
 
-const SubTitle = styled.h4`
-  border-width: 2px;
-  border-color: white;
-  color: white;
-  text-align: center;
-  margin-top: 1px;
-  margin-bottom: 2px;
-`;
-
 const Description = styled.h4`
   text-align: left;
   margin-left: 8px;
@@ -109,8 +103,7 @@ const DescriptionTiny = styled.div`
   border-style: solid;
   margin-right: 16px;
   border-radius: 4px;
-  height: 400px;
-  overflow: scroll;
+  width: 100%;
 `;
 
 const TextBox = styled.div`
@@ -132,8 +125,6 @@ const NoResult = styled.div`
 `;
 
 const Img = styled.img`
-  width: 300px;
-  height: 400px;
   border-radius: 4px;
   margin-left: 16px;
   margin-right: 16px;
@@ -141,6 +132,7 @@ const Img = styled.img`
   border-color: white;
   border-style: solid;
   color: white;
+  width: 30%;
 `;
 
 const InfoContainer = styled.div`
@@ -169,4 +161,5 @@ const SubContent = styled.div`
   border-top-color: #ffffff;
   border-bottom-color: #ffffff;
   margin-bottom: 19.92px;
+  height: 100vh;
 `;
