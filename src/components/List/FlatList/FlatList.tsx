@@ -1,26 +1,24 @@
 import React from "react";
-import styled from "styled-components";
 
-export interface Props {
+type Item = {
+  id: number;
+  text: string;
+};
+
+type FlatListProps = {
   data: any;
-}
+  renderItem: (item: Item) => React.ReactNode;
+  style?: React.CSSProperties;
+};
 
-const FlatList = ({ data }: Props) => {
+const FlatList = ({ data, renderItem, style }: FlatListProps) => {
   return (
-    <main className="product">
-      <ul className="product-list">
-        {data.map((element: any) => (
-          <Card key={data.id}>{element}</Card>
-        ))}
-      </ul>
-    </main>
+    <div style={style}>
+      {data.map((item: any) => (
+        <div key={item.id}>{renderItem(item)}</div>
+      ))}
+    </div>
   );
 };
 
 export default FlatList;
-
-const Card = styled.div`
-  color: white;
-  width: 500;
-  height: 600;
-`;
