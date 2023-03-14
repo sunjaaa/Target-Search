@@ -15,15 +15,14 @@ dotenv.config();
 app.get("/api/search/target", async (req, res) => {
   const target = req.query.target;
   const emptyInfo = [];
-  let humanList = [];
 
-  await searchTarget(target, humanList);
+  const targetInfo = await searchTarget(target);
 
-  console.log("humanlist", humanList);
+  console.log("targetInfo", targetInfo);
 
   if (target.length > 0) {
     console.log("target : ", target);
-    res.json(humanList);
+    res.json(targetInfo);
   } else {
     console.log("target : ", target);
     res.json(emptyInfo);
