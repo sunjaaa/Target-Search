@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import SearchInput from "../../components/Input/SearchInput";
+import SearchInput from "@components/Input/SearchInput";
+import CircleLoading from "@components/Indicator/CircleLoading";
+
 import ShowTargetInfo from "./components/ShowTargetInfo";
 
-import { fetchHuman } from "../../hooks/useHuman";
+import { fetchHuman } from "@hooks/useHuman";
 
 const Home = () => {
   const [result, setResult] = useState();
@@ -39,12 +41,23 @@ const Home = () => {
       <InputBox>
         <SearchInput onChange={onChange} onKeyDown={activeEnter} />
       </InputBox>
-      <ShowTargetInfo targetInfo={result} isLoading={isLoading} />
+      {isLoading === true ? (
+        <CircleLoading
+          color="white"
+          stroke={10}
+          radius={100}
+          style={indicator}
+        />
+      ) : (
+        <ShowTargetInfo targetInfo={result} />
+      )}
     </Container>
   );
 };
 
 export default Home;
+
+const indicator = { alignSelf: "center", marginTop: "20%" };
 
 const Container = styled.div`
   display: flex;
