@@ -14,31 +14,6 @@ app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-
-const configuration = new Configuration({
-  apiKey: OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
-app.post("/", async (req, res) => {
-  const { message } = req.body;
-  const response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: `${message}`,
-    max_tokens: 4000,
-    temperature: 0,
-  });
-
-  if (response.data) {
-    if (response.data.choices) {
-      res.json({
-        message: response.data.choices[0].text,
-      });
-    }
-  }
-});
-
 app.get("/api/search/target", async (req, res) => {
   const target = req.query.target;
   const emptyInfo = [];

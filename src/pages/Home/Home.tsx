@@ -33,38 +33,11 @@ const Home = () => {
     setResult(info);
   };
 
-  const [message, setMessage] = useState("");
-  const [response, setResponse] = useState("");
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    fetch("http://localhost:3001/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message }),
-    })
-      .then((res) => res.json())
-      .then((data) => setResponse(data.message));
-  };
-
   return (
     <Container>
       <InputBox>
         <SearchInput onChange={onChange} onKeyDown={activeEnter} />
       </InputBox>
-      {/* <div className="App">
-        <form onSubmit={handleSubmit}>
-          <textarea
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          ></textarea>
-          <button type="submit">Submit</button>
-        </form>
-        <div style={{ backgroundColor: "white" }}>{response}</div>
-      </div>{" "} */}
-
       <ShowTargetInfo targetInfo={result} />
     </Container>
   );
