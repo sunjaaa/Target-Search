@@ -3,12 +3,12 @@ import styled from "styled-components";
 import SearchInput from "../../components/Input/SearchInput";
 import ShowTargetInfo from "./components/ShowTargetInfo";
 
-import Snipper from "react-spinner-material";
-
 import { fetchHuman } from "../../hooks/useHuman";
 
 const Home = () => {
   const [result, setResult] = useState();
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const inputText = useRef("");
 
@@ -28,9 +28,10 @@ const Home = () => {
   };
 
   const activeButton = async () => {
-    console.log("INPUT TARGET : ", inputText.current);
+    setIsLoading(true);
     const info = await fetchHuman(inputText.current);
     setResult(info);
+    setIsLoading(false);
   };
 
   return (
@@ -38,7 +39,7 @@ const Home = () => {
       <InputBox>
         <SearchInput onChange={onChange} onKeyDown={activeEnter} />
       </InputBox>
-      <ShowTargetInfo targetInfo={result} />
+      <ShowTargetInfo targetInfo={result} isLoading={isLoading} />
     </Container>
   );
 };
@@ -63,16 +64,4 @@ const InputBox = styled.form`
   margin-right: 32%;
   padding-top: 8px;
   padding-bottom: 8px;
-`;
-
-const Empty = styled.div`
-  display: flex;
-  flex: 1;
-  height: 100vh;
-  background-color: #000000;
-  padding-left: 16px;
-  padding-right: 16px;
-  border-top-style: solid;
-  border-width: 1px;
-  border-top-color: #ffffff;
 `;

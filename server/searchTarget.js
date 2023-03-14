@@ -54,9 +54,15 @@ exports.searchTarget = async (target, list) => {
         (element) => element.src
       );
       infos.img = img;
-    } catch (e) {
-      infos.img = "";
-    }
+    } catch (e) {}
+
+    try {
+      const content = await webPage.$eval(
+        "#mw-content-text > div.mw-parser-output > p:nth-child(5)",
+        (element) => element.textContent
+      );
+      infos.content = content;
+    } catch (e) {}
 
     list.push(cardTables);
     list.push(infos);

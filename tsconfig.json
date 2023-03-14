@@ -21,7 +21,6 @@
       "es2020.symbol.wellknown",
       "es2021.promise"
     ],
-
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

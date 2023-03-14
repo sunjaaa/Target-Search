@@ -1,9 +1,11 @@
 import { helper } from "@utils/index";
+import Snipper from "react-spinner-material";
 import styled from "styled-components";
 
 export interface TargetInfoItem {
   name?: string;
   img?: string;
+  content?: string;
   cardInfo1?: string;
   cardInfo2?: string;
   cardInfo3?: string;
@@ -18,52 +20,76 @@ export interface TargetInfoItem {
 
 export interface Props {
   targetInfo?: Array<TargetInfoItem>;
-  aiInfo?: Array<string>;
+  isLoading?: boolean;
 }
 
-const ShowTargetInfo = ({ targetInfo }: Props) => {
-  if (!targetInfo) {
-    return (
-      <NoResult>
-        <TextBox>
-          <Title>검색 결과가 없습니다</Title>
-        </TextBox>
-      </NoResult>
-    );
-  } else {
+const ShowTargetInfo = ({ targetInfo, isLoading }: Props) => {
+  if (targetInfo) {
     const targetName = targetInfo[1]?.name ?? "이름 없음";
 
-    const img = targetInfo[1]?.img ?? "사진 없음";
+    const img = targetInfo[1]?.img ?? "http://folo.co.kr/img/gm_noimage.png";
 
-    console.log("targetInfo", targetInfo);
+    const content =
+      targetInfo[1]?.content ?? "해당 인물과 관련된 정보를 찾을 수 없습니다.";
 
     return (
       <Container>
         <TextBox>
-          <Title>{targetName}</Title>
-          <InfoContainer>
-            <InfoBox>
-              <Img src={img} />
-              <DescriptionTiny>
-                <Description>{targetInfo[0]?.cardInfo1}</Description>
-                <Description>{targetInfo[0]?.cardInfo2}</Description>
-                <Description>{targetInfo[0]?.cardInfo3}</Description>
-                <Description>{targetInfo[0]?.cardInfo4}</Description>
-                <Description>{targetInfo[0]?.cardInfo5}</Description>
-                <Description>{targetInfo[0]?.cardInfo6}</Description>
-                <Description>{targetInfo[0]?.cardInfo7}</Description>
-                <Description>{targetInfo[0]?.cardInfo8}</Description>
-                <Description>{targetInfo[0]?.cardInfo9}</Description>
-                <Description>{targetInfo[0]?.cardInfo10}</Description>
-              </DescriptionTiny>
-            </InfoBox>
-          </InfoContainer>
-          <SubContent>
-            <Description>콘텐츠 없음</Description>
-          </SubContent>
+          {isLoading === true ? (
+            <Snipper
+              color="white "
+              stroke={10}
+              radius={100}
+              style={{ alignSelf: "center", marginTop: "20%" }}
+            />
+          ) : (
+            <>
+              <Title>{targetName}</Title>
+              <InfoContainer>
+                <InfoBox>
+                  <Img src={img} />
+                  <DescriptionTiny>
+                    <Description>{targetInfo[0]?.cardInfo1}</Description>
+                    <Description>{targetInfo[0]?.cardInfo2}</Description>
+                    <Description>{targetInfo[0]?.cardInfo3}</Description>
+                    <Description>{targetInfo[0]?.cardInfo4}</Description>
+                    <Description>{targetInfo[0]?.cardInfo5}</Description>
+                    <Description>{targetInfo[0]?.cardInfo6}</Description>
+                    <Description>{targetInfo[0]?.cardInfo7}</Description>
+                    <Description>{targetInfo[0]?.cardInfo8}</Description>
+                    <Description>{targetInfo[0]?.cardInfo9}</Description>
+                    <Description>{targetInfo[0]?.cardInfo10}</Description>
+                  </DescriptionTiny>
+                </InfoBox>
+              </InfoContainer>
+              <SubContent>
+                <Description>{content}</Description>
+              </SubContent>
+            </>
+          )}
         </TextBox>
       </Container>
     );
+  }
+  if (!targetInfo) {
+    return (
+      <Container>
+        <TextBox>
+          {isLoading === true ? (
+            <Snipper
+              color="white "
+              stroke={10}
+              radius={100}
+              style={{ alignSelf: "center", marginTop: "20%" }}
+            />
+          ) : (
+            <Title>검색 결과가 없습니다</Title>
+          )}
+        </TextBox>
+      </Container>
+    );
+  } else {
+    return <div />;
   }
 };
 
@@ -71,7 +97,6 @@ export default ShowTargetInfo;
 
 const Container = styled.div`
   display: flex;
-  flex: 1;
   height: 100vh;
   background-color: #000000;
   border-top-style: solid;
@@ -110,18 +135,6 @@ const TextBox = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-`;
-
-const NoResult = styled.div`
-  display: flex;
-  height: 100vh;
-  background-color: #000000;
-  border-top-style: solid;
-  border-bottom-style: solid;
-  border-width: 1px;
-  border-top-color: #ffffff;
-  border-bottom-color: #ffffff;
-  margin-bottom: 19.92px;
 `;
 
 const Img = styled.img`
