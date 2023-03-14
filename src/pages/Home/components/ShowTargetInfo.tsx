@@ -33,7 +33,7 @@ const ShowTargetInfo = ({ targetInfo }: Props) => {
   } else {
     const targetName = targetInfo[1]?.name ?? "이름 없음";
 
-    const img = targetInfo[1].img ?? "이미지 없음";
+    const img = targetInfo[1]?.img ?? "사진 없음";
 
     console.log("targetInfo", targetInfo);
 

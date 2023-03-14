@@ -1,10 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const OpenAI = require("openai");
 const dotenv = require("dotenv");
 
-const { Configuration, OpenAIApi } = OpenAI;
 const { searchTarget } = require("./server/searchTarget");
 
 const app = express();
