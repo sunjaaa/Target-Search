@@ -36,21 +36,20 @@ const Home = () => {
     setIsLoading(false);
   };
 
+  const IsLoading = () => {
+    return isLoading === true ? (
+      <CircleLoading color="white" stroke={10} radius={100} style={indicator} />
+    ) : (
+      <ShowTargetInfo targetInfo={result} />
+    );
+  };
+
   return (
     <Container>
       <InputBox>
         <SearchInput onChange={onChange} onKeyDown={activeEnter} />
       </InputBox>
-      {isLoading === true ? (
-        <CircleLoading
-          color="white"
-          stroke={10}
-          radius={100}
-          style={indicator}
-        />
-      ) : (
-        <ShowTargetInfo targetInfo={result} />
-      )}
+      <IsLoading />
     </Container>
   );
 };
