@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import FlatList from "@components/List/FlatList/FlatList";
 
-export interface cardInfosItem {
+export interface Item {
   content: string;
   _id: number;
 }
@@ -10,7 +10,7 @@ export interface Props {
   targetInfo?: {
     name: string;
     img: string;
-    card_infos: Array<cardInfosItem>;
+    card_infos: Array<Item>;
   };
   isLoading?: boolean;
 }
@@ -24,7 +24,7 @@ const TargetInfos = ({ targetInfo }: Props) => {
 
   const data = targetInfo?.card_infos;
 
-  const renderItemHandler = (item: any) => {
+  const renderItemHandler = (item: Item) => {
     return <Description>{item.content}</Description>;
   };
 

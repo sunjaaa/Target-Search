@@ -1,9 +1,9 @@
 import React from "react";
 
-type Item = {
-  id: number;
-  text: string;
-};
+export interface Item {
+  content: string;
+  _id: number;
+}
 
 type FlatListProps = {
   data: any;
@@ -14,8 +14,8 @@ type FlatListProps = {
 const FlatList = ({ data, renderItem, style }: FlatListProps) => {
   return (
     <div style={style}>
-      {data.map((item: any) => (
-        <div key={item.id}>{renderItem(item)}</div>
+      {data.map((item: Item) => (
+        <div key={item._id}>{renderItem(item)}</div>
       ))}
     </div>
   );

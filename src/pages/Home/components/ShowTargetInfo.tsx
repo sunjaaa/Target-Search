@@ -1,7 +1,7 @@
 import NoInfos from "./NoInfos";
 import TargetInfos from "./TargetInfos";
 
-export interface cardInfosItem {
+export interface Item {
   content: string;
   _id: number;
 }
@@ -10,9 +10,8 @@ export interface Props {
   targetInfo?: {
     name: string;
     img: string;
-    card_infos: Array<cardInfosItem>;
+    card_infos: Array<Item>;
   };
-  isLoading?: boolean;
 }
 
 const ShowTargetInfo = ({ targetInfo }: Props) => {
@@ -22,7 +21,7 @@ const ShowTargetInfo = ({ targetInfo }: Props) => {
   if (!targetInfo) {
     return <NoInfos />;
   } else {
-    return <div />;
+    return <NoInfos />;
   }
 };
 
