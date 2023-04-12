@@ -9,13 +9,21 @@ type FlatListProps = {
   data: any;
   renderItem: (item: Item) => React.ReactNode;
   style?: React.CSSProperties;
+  containerStyle?: React.CSSProperties;
 };
 
-const FlatList = ({ data, renderItem, style }: FlatListProps) => {
+const FlatList = ({
+  data,
+  renderItem,
+  style,
+  containerStyle,
+}: FlatListProps) => {
   return (
-    <div style={style}>
+    <div style={containerStyle}>
       {data.map((item: Item) => (
-        <div key={item._id}>{renderItem(item)}</div>
+        <div key={item._id} style={style}>
+          {renderItem(item)}
+        </div>
       ))}
     </div>
   );

@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 const { searchTarget } = require("./server/searchTarget");
 
 const app = express();
-const port = 3001;
+const port = 3002;
 
 app.use(cors());
 app.use(bodyParser.json());
