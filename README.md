@@ -3,8 +3,7 @@
 타입스크립트를 경험해보기위해 간단히 만들어본 인물검색 프로젝트이다.
 
 ## 화면
----
-![targetSearcEX](https://i.ibb.co/5htZ649/2023-04-12-5-10-31.png)
+![targetSearcEX](https://i.ibb.co/LgHDbBc/2023-04-19-10-28-28.png)
 ---
 
 * 기능 설명
